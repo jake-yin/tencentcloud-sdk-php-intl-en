@@ -24,6 +24,8 @@ use TencentCloud\Common\AbstractModel;
  * @method void setDatabase(string $Database) Set Database name
  * @method string getTable() Obtain Table name
  * @method void setTable(string $Table) Set Table name
+ * @method string getInstanceId() Obtain InstanceId
+ * @method void setInstanceId(string $InstanceId) Set InstanceId
  * @method array getSelectedFields() Obtain Array of fields to be queried
  * @method void setSelectedFields(array $SelectedFields) Set Array of fields to be queried
  * @method integer getPageNum() Obtain Page number, which is 1 by default.
@@ -34,6 +36,9 @@ use TencentCloud\Common\AbstractModel;
  * @method void setUserName(string $UserName) Set Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
  * @method string getPassWord() Obtain Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
  * @method void setPassWord(string $PassWord) Set Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+ * @method string getCatalogName() Obtain Catalog name, defaults to 'internal' if not specified.
+
+ * @method void setCatalogName(string $CatalogName) Set Catalog name, defaults to 'internal' if not specified.
  */
 class QueryTableDataRequest extends AbstractModel
 {
@@ -46,6 +51,11 @@ class QueryTableDataRequest extends AbstractModel
      * @var string Table name
      */
     public $Table;
+
+    /**
+     * @var string InstanceId
+     */
+    public $InstanceId;
 
     /**
      * @var array Array of fields to be queried
@@ -73,13 +83,21 @@ class QueryTableDataRequest extends AbstractModel
     public $PassWord;
 
     /**
+     * @var string Catalog name, defaults to 'internal' if not specified.
+
+     */
+    public $CatalogName;
+
+    /**
      * @param string $Database Database name
      * @param string $Table Table name
+     * @param string $InstanceId InstanceId
      * @param array $SelectedFields Array of fields to be queried
      * @param integer $PageNum Page number, which is 1 by default.
      * @param integer $PageSize Number of records per page, which is 10 by default.
      * @param string $UserName Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
      * @param string $PassWord Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+     * @param string $CatalogName Catalog name, defaults to 'internal' if not specified.
      */
     function __construct()
     {
@@ -102,6 +120,10 @@ class QueryTableDataRequest extends AbstractModel
             $this->Table = $param["Table"];
         }
 
+        if (array_key_exists("InstanceId",$param) and $param["InstanceId"] !== null) {
+            $this->InstanceId = $param["InstanceId"];
+        }
+
         if (array_key_exists("SelectedFields",$param) and $param["SelectedFields"] !== null) {
             $this->SelectedFields = $param["SelectedFields"];
         }
@@ -120,6 +142,10 @@ class QueryTableDataRequest extends AbstractModel
 
         if (array_key_exists("PassWord",$param) and $param["PassWord"] !== null) {
             $this->PassWord = $param["PassWord"];
+        }
+
+        if (array_key_exists("CatalogName",$param) and $param["CatalogName"] !== null) {
+            $this->CatalogName = $param["CatalogName"];
         }
     }
 }
